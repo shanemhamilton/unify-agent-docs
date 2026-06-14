@@ -1,0 +1,20 @@
+{
+  "name": "unify-agent-docs",
+  "owner": {
+    "name": "Shane Hamilton",
+    "email": "shanemhamilton@gmail.com"
+  },
+  "description": "Keep AI-agent instruction files in sync across Claude Code, Codex, Cursor, and Gemini.",
+  "plugins": [
+    {
+      "name": "unify-agent-docs",
+      "source": "./",
+      "displayName": "Unify Agent Docs",
+      "description": "Consolidate CLAUDE.md / AGENTS.md / GEMINI.md into one canonical file per directory via symlinks, with a drift-proof pre-commit guard.",
+      "version": "1.0.0",
+      "license": "MIT",
+      "category": "tooling",
+      "keywords": ["agents-md", "claude-md", "gemini", "codex", "cursor", "agent-instructions", "monorepo"]
+    }
+  ]
+}

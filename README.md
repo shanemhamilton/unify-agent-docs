@@ -37,23 +37,48 @@ your-project/
 
 ## Install
 
-### As a Claude Code skill (recommended)
+### As a Claude Code plugin (recommended)
 
-```bash
-git clone https://github.com/shanemhamilton/unify-agent-docs.git \
-  ~/.claude/skills/unify-agent-docs
+```text
+/plugin marketplace add shanemhamilton/unify-agent-docs
+/plugin install unify-agent-docs@unify-agent-docs
 ```
 
-Then in any project, ask Claude to *"unify the agent docs in this project"* (or invoke `/unify-agent-docs`). The skill walks the full workflow: inventory the files, merge their content losslessly, set up the symlinks, install the guard, and verify.
+You get the skill (and future updates) in one step. Then in any project, ask Claude to
+*"unify the agent docs in this project"* or invoke `/unify-agent-docs:unify-agent-docs`. The
+skill walks the full workflow: inventory the files, merge their content losslessly, set up the
+symlinks, install the guard, and verify.
+
+### As a plain skill (clone or download)
+
+```bash
+# copy just the skill into your skills directory
+git clone https://github.com/shanemhamilton/unify-agent-docs.git /tmp/uad \
+  && cp -R /tmp/uad/skills/unify-agent-docs ~/.claude/skills/
+```
+
+Or grab the packaged `unify-agent-docs.skill` from the
+[latest release](https://github.com/shanemhamilton/unify-agent-docs/releases/latest) for a
+drag-and-drop / claude.ai install.
 
 ### Just the script (any agent, no skill runtime)
 
 The engine is a single dependency-free Bash script — copy it into your repo:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/shanemhamilton/unify-agent-docs/main/scripts/agent-docs.sh \
+curl -fsSL https://raw.githubusercontent.com/shanemhamilton/unify-agent-docs/main/skills/unify-agent-docs/scripts/agent-docs.sh \
   -o tools/agent-docs.sh && chmod +x tools/agent-docs.sh
 ```
+
+### Use with Codex, Cursor, Gemini, and other agents
+
+Nothing here is Claude-only. The `agent-docs.sh` engine and the `pre-commit` guard are
+plain Bash — drop them into any repo regardless of which agent you use. The `SKILL.md`
+workflow is written so any agent that reads project instructions (`AGENTS.md` for Codex/Cursor,
+`GEMINI.md` for Gemini CLI) can follow it directly: point the agent at
+[`skills/unify-agent-docs/SKILL.md`](skills/unify-agent-docs/SKILL.md) and ask it to unify the
+docs. Tools that support the [Agent Skills](https://agentskills.io) standard can install the
+`skills/unify-agent-docs/` folder the same way Claude Code does.
 
 ---
 
