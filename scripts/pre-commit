@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Agent-docs drift guard — keeps AGENTS.md/CLAUDE.md/GEMINI.md identical and the
+# embedded SHARED-CORE block in sync. Installed by the unify-agent-docs skill.
+# Enable once per clone:  git config core.hooksPath .githooks
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+if [[ -x "$ROOT/tools/agent-docs.sh" ]]; then
+  "$ROOT/tools/agent-docs.sh" --check
+fi
