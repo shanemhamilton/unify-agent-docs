@@ -110,7 +110,26 @@ overwrite a rich CLAUDE.md you hadn't folded in yet.
 - Slim any stale/duplicate instruction files that are no longer authoritative into short
   redirect stubs pointing at the canonical files.
 
-## Phase 5 — Verify, then commit
+## Phase 5 — Quality pass (improve the canonical files)
+
+Unification fixes *where* the rules live; this pass fixes *how good* they are. Now that each
+directory has one canonical file, audit and tighten it so the agent actually has what it needs
+— a structurally-perfect file full of vague or stale guidance still fails the agent.
+
+- **Edit the canonical `AGENTS.md` only.** `CLAUDE.md`/`GEMINI.md` are symlinks and reflect the
+  change automatically; writing to a symlink replaces it and trips the guard. If you change
+  `docs/agents/shared-core.md`, re-run `tools/agent-docs.sh --sync` to re-embed it.
+- Audit each canonical file against the rubric in
+  [`references/quality-pass.md`](references/quality-pass.md) — commands present, architecture
+  clear, non-obvious gotchas captured, concise, current, actionable. Score each, output a short
+  report, and get the user's OK **before** writing.
+- Make **targeted, minimal** additions only — leanness is the feature. Add a missing
+  build/test/deploy command, a gotcha you found in the code, a corrected stale fact; don't
+  restate the code or pad with generic advice. Show each change as a diff with a one-line "why."
+- If the `claude-md-management:claude-md-improver` skill is installed you can drive this pass
+  with it — but point it at the canonical `AGENTS.md` files (not the `CLAUDE.md` symlinks).
+
+## Phase 6 — Verify, then commit
 
 Verification is non-negotiable — the value of this skill is that drift *fails loudly*, so
 prove the guard actually fires.
