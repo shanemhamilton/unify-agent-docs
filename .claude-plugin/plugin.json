@@ -2,7 +2,7 @@
   "name": "unify-agent-docs",
   "displayName": "Unify Agent Docs",
   "description": "Consolidate CLAUDE.md / AGENTS.md / GEMINI.md into one canonical file per directory via symlinks, with a drift-proof pre-commit guard, so Claude Code, Codex, Cursor, and Gemini share one source of truth.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Shane Hamilton"
   },
